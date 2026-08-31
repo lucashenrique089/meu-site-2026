@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas Henrique | Data & Marketing Science</title>
+
+    <!-- Ícones Externos -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Google Fonts Corrigido -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Variáveis de Cores Primárias */
+        :root {
+            --bg-color: #1f242d;
+            --second-bg-color: #323946;
+            --text-color: #fff; 
+            --main-color: rgb(65, 201, 243);
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 10rem 9% 2rem;
+        }
+
+        /* Cabeçalho / Navbar */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 9%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .header.stick {
+            border-bottom: .1rem solid rgba(0, 0, 0, .2);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: default;
+        }
+
+        .logo:hover {
+            background: var(--main-color);
+            box-shadow: 0 0 2rem var(--main-color);
+            box-sizing: border-box;
+            transition: .3s;
+        }
+
+        .navbar a {
+            font-size: 1.7rem;
+            color: var(--text-color);
+            margin-left: 4rem;
+            transition: .3s;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--main-color);
+        }
+
+        #menu-icon {
+            font-size: 3.6rem;
+            color: var(--text-color);
+            display: none;
+        }
+
+        /* Seção Home (Layout Centralizado sem Imagem) */
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .home-content h3 {
+            font-size: 3.2rem;
+            font-weight: 700;
+        }
+
+        .home-content h3:nth-of-type(2) {
+            margin-bottom: 2rem;
+        }
+
+        span {
+            color: var(--main-color);
+        }
+
+        .home-content h1 {
+            font-size: 5.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 1rem 0;
+        }
+
+        .home-content p {
+            font-size: 1.6rem;
+            max-width: 80rem;
+            margin: 2rem auto;
+        }
+
+        /* Mídias Sociais e Botões */
+        .social-media {
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-media a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 6rem;
+            height: 6rem;
+            border: .2rem solid var(--main-color);
+            border-radius: 50%;
+            font-size: 3rem;
+            color: var(--main-color);
+            margin: 3rem 1.5rem;
+            transition: .5s ease;
+        }
+
+        .social-media a:hover {
+            background: var(--main-color);
+            color: var(--second-bg-color);
+            box-shadow: 0 0 1rem var(--main-color);
+        }   
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.8rem;
+            background: var(--main-color);
+            border-radius: 4rem;
+            box-shadow: 0 0 1rem var(--main-color);
+            font-size: 1.6rem;
+            color: var(--second-bg-color);
+            letter-spacing: .1rem;
+            font-weight: 600;
+            transition: .5s ease;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Seção Sobre Mim - Layout Fixo Lado a Lado */
+        .about {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5rem;
+            background: var(--second-bg-color);
+            flex-wrap: nowrap;
+        }
+
+        .about-img {
+            flex: 1; 
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 2rem;
+            box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.4);
+        }
+
+        .about-content {
+            flex: 1.2;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 4.5rem;
+        }
+
+        .about-content h2 {
+            text-align: left;
+            line-height: 1.2;
+        }
+
+        .about-content h3 {
+            font-size: 2.6rem;
+        }
+
+        .about-content p {
+            font-size: 1.6rem;
+            margin: 2rem 0 3rem;
+        }
+
+        /* Seção Minha Expertise / Serviços */
+        .services-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .services-container .services-box {
+            flex: 1 1 40rem;
+            background: var(--second-bg-color);
+            padding: 4rem 5rem 4rem;
+            border-radius: 5rem;
+            text-align: center;
+            border: 1rem solid var(--bg-color);
+            transition: .5s ease;
+        }
+
+        .services-container .services-box:hover {
+            border-color: var(--main-color);
+            transform: scale(1.05);
+        }
+
+        .services-box i {
+            font-size: 7rem;
+            color: var(--main-color);
+        }
+
+        .services-box h3 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .services-box p {
+            font-size: 1.5rem;
+            margin: 1rem 0 3rem;
+        }
+
+        /* Seção Portfólio */
+        .portfolio {
+            background: var(--second-bg-color);
+        }
+
+        .portfolio h2 {
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .portfolio-container .portfolio-box {
+            position: relative;
+            border-radius: 2rem;
+            box-shadow: 0 0 1rem var(--bg-color);
+            overflow: hidden;
+            display: flex;
+        }
+
+        .portfolio-box img {
+            width: 100%;
+            transition: .5s ease;
+        }
+
+        .portfolio-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-box .portfolio-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.1), var(--main-color));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0 4rem;
+            transform: translateY(100%);
+            transition: .5s ease;
+        }
+
+        .portfolio-box:hover .portfolio-layer {
+            transform: translateY(0);
+        }
+
+        .portfolio-layer h4 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .portfolio-layer p {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #000;
+            margin: .3rem 0 1rem;
+        }
+
+        .portfolio-layer a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 5rem;
+            height: 5rem;
+            background: var(--text-color);
+            border-radius: 50%;
+        }
+
+        .portfolio-layer a i {
+            font-size: 2rem;
+            color: var(--second-bg-color);
+        }
+
+        /* Seção Contato */
+        .contato h2 {
+            margin-bottom: 3rem;
+        }
+
+        .contato form {
+            max-width: 70rem;
+            margin: 1rem auto;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contato form .input-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .contato form .input-box input,
+        .contato form textarea {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--text-color);
+            background: var(--second-bg-color);
+            border-radius: .8rem;
+            margin: .7rem 0;
+        }
+
+        .contato form .input-box input {
+            width: 49%;
+        }
+
+        .contato form textarea {
+            resize: none;
+        }
+
+        .contato form .btn {
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        /* Rodapé / Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 2rem 9%;
+            background-color: var(--second-bg-color);
+        }
+
+        .footer-text p {
+            font-size: 1.6rem;
+            align-items: center;
+        }
+
+        .footer-iconTop a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: .8rem;
+            background: var(--main-color);
+            border-radius: .8rem;
+            transition: .5s ease;
+        }
+
+        .footer-iconTop a:hover {
+            box-shadow: 0 0 1rem var(--main-color);
+        }
+
+        .footer-iconTop a i {
+            font-size: 2.4rem;
+            color: var(--second-bg-color);
+        }
+
+/* ==========================================
+            Responsividade (Breakpoints) Corrigida
+            ========================================== */
+        
+        @media (max-width: 1200px) {
+            html { font-size: 55%; }
+        }
+
+        @media (max-width: 991px) {
+            .header { padding: 2rem 3%; }
+            section { padding: 10rem 3% 2rem; }
+            .services { padding-bottom: 7rem; }
+            .portfolio { padding-bottom: 7rem; }
+            .contato { min-height: auto; }
+            .footer { padding: 2rem 3%; }
+        }
+
+        @media (max-width: 768px) {
+            #menu-icon { display: block; }
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 3%;
+                background: var(--bg-color);
+                border-top: .1rem solid rgba(0, 0, 0, .2);
+                box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
+                display: none;
+            }
+            .navbar.active { display: block; }
+            
+            /* Aumenta a área de toque no celular */
+            .navbar a { 
+                display: block; 
+                font-size: 2rem; 
+                padding: 1.5rem 0; 
+                margin: 1rem 0; 
+                text-align: center;
+            }
+            
+            .home { flex-direction: column; }
+            
+            /* Evita que o site pule quando o texto digitar na segunda linha */
+            .home-content h3:nth-of-type(2) {
+                min-height: 8rem;
+            }
+            
+            .home-content h3 { font-size: 2.6rem; }
+            .home-content h1 { font-size: 4.5rem; } /* Reduzido levemente para não quebrar */
+            
+            .about { 
+                flex-direction: column-reverse; 
+                text-align: center;
+                gap: 3rem;
+            }
+            .about-content h2 { text-align: center; }
+            .about-img { margin-top: 3rem; }
+            
+            /* Força empilhamento perfeito sem vazar a tela */
+            .services-container .services-box {
+                flex: 1 1 100%; 
+            }
+
+            .services h2, .portfolio h2 { margin-bottom: 3rem; }
+            .portfolio-container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 617px) {
+            .portfolio-container { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 450px) {
+            html { font-size: 50%; }
+            .contato form .input-box input { width: 100%; }
+            .home-content p { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 365px) {
+            .about-img img { width: 90vw; }
+            .home-content h1 { font-size: 3.8rem; } /* Ajuste extra para telas muito pequenas */
+            .footer { flex-direction: column-reverse; }
+            .footer p { text-align: center; margin-top: 2rem; }
+        }    </style>
+</head>
+
+<body>
+    <!-- Header Design -->
+    <header class="header">
+        <a href="#" class="logo">Portfólio</a>
+        <i class='bx bx-menu' id="menu-icon"></i>
+        <nav class="navbar">
+            <a href="#home" class="active">Início</a>
+            <a href="#SobreMim">Sobre Mim</a>
+            <a href="#Servicos">Minha Expertise</a>
+            <a href="#Portfolio">Portfólio</a>
+            <a href="#Contato">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Home Section Design -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Olá, Este sou eu!!!</h3>
+            <h1>Me chamo Lucas Henrique</h1>
+            <h3><span class="multiple-text"></span></h3>
+            <p>Formado em Propaganda e Marketing, tenho 32 anos e atuo como Analista de Marketing Focado em Dados em uma grande rede do varejo automotivo. Pós-graduando em Data Analytics pela FIAP, meu foco principal é progredir resolvendo gargalos reais de negócios e implementando ideias orientadas à tomada de decisão. Sou empenhado, analítico, proativo e com muita sede de aprender. Espero que gostem do compilado de projetos que realizei nos últimos anos!</p>
+
+            <div class="social-media">
+                <a href="https://www.instagram.com/itsluquinhas_/"><i class='bx bxl-instagram' ></i></a>
+                <a href="https://github.com/lucashenrique089"><i class='bx bxl-github' ></i></a>
+                <a href="https://twitter.com/its_luquinhas"><i class='bx bxl-twitter' ></i></a>
+                <a href="https://www.linkedin.com/in/lucas-henrique-da-silva-cruz-5b8a25103/"><i class='bx bxl-linkedin' ></i></a>
+            </div>
+
+            <a href="Lucas_Cruz_Curriculo_Criativo_Atualizado.pdf" download="Lucas_Cruz_Curriculo_Criativo_Atualizado" class="btn">Download CV</a>
+        </div>
+    </section>
+
+    <!-- Sobre Mim Section Design -->
+    <section class="about" id="SobreMim">
+        <div class="about-img">
+            <img src="imagens/nba_house_evento.png" alt="Lucas na NBA House">
+        </div>
+
+        <div class="about-content">
+            <h2 class="heading"><span class="multiple-text2"></span></h2>
+            <h3>De Osasco para o universo dos dados.</h3>
+            <p>Nascido e criado em Osasco, minha essência sempre foi moldada pela cultura urbana e pela intensidade. Sou movido pela disciplina: a mesma constância que me leva à academia diariamente e me conecta com a energia da dança, é a dedicação que aplico ao estruturar e analisar bases de dados complexas no Python.</p>
+            
+            <p>Minha mente funciona no cruzamento entre a lógica e a criatividade. Quando não estou criando dashboards no Power BI ou otimizando campanhas de performance, provavelmente estou com os fones de ouvido escutando um bom Rap ou Trap, ou explorando o poder da Inteligência Artificial para roteirizar e gerar vídeos focados em narrativas imersivas.</p>
+            
+            <p>Para mim, dados contam histórias. E eu uso a minha bagagem — da vivência urbana ao ambiente corporativo — para traduzir números frios em estratégias e soluções que geram impacto real.</p>
+            
+            <a href="https://www.linkedin.com/in/lucas-henrique-da-silva-cruz/" class="btn">Conecte-se comigo</a>
+        </div>
+    </section>
+
+    <!-- Seção Expertise / Serviços -->
+    <section class="services" id="Servicos">
+        <h2 class="heading" style="margin-bottom: 0.5rem;">Meu crescimento <span>Profissional</span></h2>
+        <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 5rem; font-weight: 400;"><span class="multiple-text3"></span></h2>
+
+        <div class="services-container">
+            <div class="services-box">
+                <i class='bx bx-code-alt'></i>
+                <h3>Landing Pages</h3>
+                <p>Desenvolvimento front-end de páginas de vendas focadas em performance (HTML/CSS e WordPress). Projetadas meticulosamente com tagueamento completo de dados (Tags e Pixels de Rastreamento) e estratégias de SEO para garantir máxima conversão de tráfego e captação eficiente de leads qualificados.</p>
+                <a href="https://lucashenrique089.github.io/lp-carros-suv/" class="btn">Veja Mais</a>
+            </div>
+
+            <div class="services-box">
+                <i class='bx bxs-data' ></i>
+                <h3>Análise de Dados</h3>
+                <p>Estruturação de relatórios e análises preditivas com foco em marketing e inteligência comercial. Construção de dashboards interativos em Power BI, cruzamento de bases complexas em Excel e tratamento de dados brutos utilizando Python (Pandas e NumPy) nos ambientes Jupyter e Google Colab.</p>
+                <a href="proj_marketing.pbix" download="proj_marketing.pbix" class="btn">Veja Mais</a>
+            </div>
+
+            <div class="services-box">
+                <i class='bx bx-bar-chart-square' ></i>
+                <h3>Marketing</h3>
+                <p>Domínio amplo em planejamento estratégico de marketing digital e tradicional. Elaboração de planos de mídia, gestão de campanhas de tráfego pago (Meta Ads e Google Ads), acompanhamento minucioso de métricas cruciais de prospecção (CPA, CTR, ROI) e implementação dos conceitos fundamentais de macroambiente e mix de marketing.</p>
+                <a href="Lucas_Cruz_Curriculo_Criativo_Atualizado.pdf" download="Lucas_Cruz_Curriculo_Criativo_Atualizado" class="btn">Download CV</a>
+            </div>
+
+            <div class="services-box">
+                <i class='bx bxl-python'></i>
+                <h3>Programação</h3>
+                <p>Utilização prática de lógica de programação aplicada à Ciência de Dados e à otimização de rotinas de negócios. Criação de scripts em Python voltados para a resolução de problemas organizacionais, análise exploratória de dados e manipulação ágil de tabelas e métricas corporativas estruturadas.</p>
+                <a href="https://github.com/lucashenrique089/estudos_python_cursoemvideo/tree/main/Exercicios" class="btn">Veja Mais</a>
+            </div>
+
+            <div class="services-box">
+                <i class='bx bxs-business'></i>
+                <h3>Resolução de Problemas</h3>
+                <p>Visão de negócios aguçada para diagnosticar gargalos de processos e desenhar soluções eficientes. Capacidade de absorção rápida de novas tecnologias (cultura data-driven) e aplicação prática de métricas operacionais para assegurar melhorias de rentabilidade e desempenho comercial.</p>
+                <a href="https://colab.research.google.com/drive/14Ohbq-MaP5cmRoe7qTjIU4vHvzKGym3L?usp=sharing" class="btn">Veja Mais</a>
+            </div>
+
+            <div class="services-box">
+                <i class='bx bxl-sketch' ></i>
+                <h3>E-commerce</h3>
+                <p>Estruturação completa de lojas virtuais (com forte background em Magento 1.0 e 2.0) e gestão de campanhas de tráfego. Utilizo ciência de dados para varrer o histórico da operação, diagnosticar o momento atual e aplicar modelos preditivos que antecipam o comportamento do consumidor, otimizando estoque, CAC e LTV para o futuro do negócio.</p>
+                <a href="https://romapneus.com.br/" class="btn">Veja Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Portfólio -->
+    <section class="portfolio" id="Portfolio">
+        <h2 class="heading">Meus <span>Projetos | Portfólio</span></h2>
+
+        <div class="portfolio-container">
+            <!-- NOVO CASE 1: E-commerce UX/UI & Estruturação -->
+            <div class="portfolio-box">
+                <img src="imagens/roma_site_mockup.png" alt="Reestruturação de E-commerce ROMA">
+                <div class="portfolio-layer">
+                    <h4>Reestruturação E-commerce (Varejo Automotivo)</h4>
+                    <p>Reformulação de UI/UX da Home, expansão do menu de serviços e criação de portal B2B para atacado.</p>
+                    <a href="https://romapneus.com.br/"><i class='bx bx-link-external' ></i></a>
+                </div>
+            </div>
+
+            <!-- NOVO CASE 2: Python + Power BI Data Analytics -->
+            <div class="portfolio-box">
+                <img src="imagens/roma_dash_mockup.png" alt="Dashboard de Vendas E-commerce 25-26">
+                <div class="portfolio-layer">
+                    <h4>ETL & BI: Análise de Vendas (25/26)</h4>
+                    <p>Limpeza e tratamento de base de dados via Python e construção de Dashboard interativo no Power BI.</p>
+                    <a href="imagens/roma_dash_mockup.png"><i class='bx bx-link-external' ></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="imagens/01_mockup.png" alt="Dashboard Marketing">
+                <div class="portfolio-layer">
+                    <h4>Dashboard: Performance de Marketing</h4>
+                    <p>Acompanhamento de canais de aquisição, CAC, LTV e taxas de conversão no Power BI.</p>
+                    <a href="imagens/01_mockup.png"><i class='bx bx-link-external' ></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="imagens/02_mockup.png" alt="Evolução de Metas">
+                <div class="portfolio-layer">
+                    <h4>Painel de Prospecção Digital</h4>
+                    <p>Análise temporal de investimentos e conversões de leads gerados em mídias online.</p>
+                    <a href="imagens/02_mockup.png"><i class='bx bx-link-external' ></i></a>
+                </div>
+            </div>
+            
+            <div class="portfolio-box">
+                <img src="imagens/03_mockup.png" alt="Painel de Logística">
+                <div class="portfolio-layer">
+                    <h4>BI: Inteligência em Logística</h4>
+                    <p>Mapeamento de tempos de entrega, fretes e desempenho operacional de cadeia logística.</p>
+                    <a href="imagens/03_mockup.png"><i class='bx bx-link-external' ></i></a>
+                </div>
+            </div>
+
+            <div class="portfolio-box">
+                <img src="imagens/04_mockup.png" alt="Projeto Faturamento">
+                <div class="portfolio-layer">
+                    <h4>Painel de Margem de Contribuição</h4>
+                    <p>Dashboard no Power BI construído para detalhar lucros líquidos e custos variáveis por filial.</p>
+                    <a href="imagens/04_mockup.png"><i class='bx bx-link-external' ></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section Design -->
+    <section class="contato" id="Contato">
+        <h2 class="heading">Comunique-se <span>Comigo</span></h2>
+
+        <form action="#">
+            <div class="input-box">
+                <input type="text" placeholder="Nome Completo" required>
+                <input type="email" placeholder="E-mail" required>
+            </div>
+            <div class="input-box">
+                <input type="number" placeholder="Telefone / WhatsApp" required>
+                <input type="text" placeholder="Assunto da Mensagem">
+            </div>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Deixe sua mensagem aqui..."></textarea>
+            <input type="submit" value="Enviar Mensagem" class="btn">
+        </form>
+    </section>
+
+    <!-- Footer Design -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>Copyright &copy; 2026 por Lucas Henrique | Todos os Direitos Reservados.</p>
+        </div>
+
+        <div class="footer-iconTop">
+            <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
+        </div>
+    </footer>
+
+    <!-- Dependências do Portfólio (ScrollReveal e Typed.js) -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/typed.js@2.0.14/dist/typed.umd.js"></script>
+
+    <!-- JavaScript Lógico Interno -->
+    <script>
+        /*============================= Menu Hamburguer ======================*/
+        let menuIcon = document.querySelector('#menu-icon');
+        let navbar = document.querySelector('.navbar');
+
+        menuIcon.onclick = () => {
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        };
+
+        /*============================= Seleção Ativa Scroll ======================*/
+        let sections = document.querySelectorAll('section');
+        let navLinks = document.querySelectorAll('header nav a');
+
+        window.onscroll = () => {
+            sections.forEach(sec =>{
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+
+                if(top >= offset && top < offset + height){
+                    navLinks.forEach(links => {
+                        links.classList.remove('active');
+                        document.querySelector('header nav a[href*='+ id +']').classList.add('active');
+                    });
+                }
+            });
+
+            /*============================= Navbar Fixa ======================*/
+            let header = document.querySelector('header');
+            header.classList.toggle('stick', window.scrollY > 100);
+
+            /*============================= Fechar menu mobile ao clicar ======================*/
+            menuIcon.classList.remove('bx-x');
+            navbar.classList.remove('active');
+        };
+
+        /*============================= Scroll Reveal JS ======================*/
+        ScrollReveal({ 
+            distance: '80px',
+            duration: 2000,
+            delay: 200
+        });
+
+        /* Ajustei a animação da home para vir de baixo agora que está centralizada */
+        ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
+        ScrollReveal().reveal('.services-container, .portfolio-container, .contato form', { origin: 'bottom' });
+        ScrollReveal().reveal('.about-img', { origin: 'left' });
+        ScrollReveal().reveal('.about-content', { origin: 'right' });
+
+        /*============================= Efeitos de Texto Dinâmicos (Typed.js) ======================*/
+        const typed = new Typed ('.multiple-text', {
+            strings: ['Analista de Marketing, Dados & Marketing Science', 'Pós-graduando em Data Analytics FIAP', 'Especialista em Performance Digital', 'Desenvolvedor de Landing Pages'],
+            typeSpeed: 80,
+            backSpeed: 50,
+            backDelay: 1500,
+            loop: true
+        });
+
+        const typed2 = new Typed ('.multiple-text2', {
+            strings: ['Um pouco sobre mim', 'Estrategista de E-commerce', 'Movido a desafios e disciplina diária', 'Fã de NBA, Rap e Cultura Urbana', 'Da academia para o Python', 'Resolvendo gargalos reais'],
+            typeSpeed: 80,
+            backSpeed: 50,
+            backDelay: 1500,
+            loop: true
+        });
+
+        const typed3 = new Typed ('.multiple-text3', {
+            strings: ['Power BI & Looker', 'Python, Pandas & Spark', 'Google Ads & Meta Ads', 'Tráfego Pago', 'Google Analytics (GA4) e plataformas de análise de dados', 'Cultura Data-Driven', 'Automações de Marketing', 'Pesquisas de Mercado', 'E-commerce', 'Estratégia de Marketing e negócios', 'Marketing Science'],
+            typeSpeed: 60,
+            backSpeed: 40,
+            backDelay: 1200,
+            loop: true
+        });
+    </script>
+</body>
+</html>
